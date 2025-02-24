@@ -35,7 +35,7 @@ export const signup = async (req, res) => {
       await newUser.save();
       res.status(201).json({ message: "User created successfully" });
     } else {
-      res.status(400).json({ message: "Invalid user data" }); 
+      res.status(400).json({ message: "Invalid user data" });
     }
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
@@ -43,9 +43,48 @@ export const signup = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  res.send("login route");
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    generateToken(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };
 
 export const logout = async (req, res) => {
-  res.send("logout route");
+  try {
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const updateProfile = async (req, res) => {
+  
 };
