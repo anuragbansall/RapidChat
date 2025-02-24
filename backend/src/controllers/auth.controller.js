@@ -111,3 +111,11 @@ export const updateProfile = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const checkAuthStatus = async (req, res) => {
+  try {
+    res.status(200).json(req.user);
+  } catch (error) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
