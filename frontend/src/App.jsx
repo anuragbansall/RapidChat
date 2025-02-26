@@ -19,14 +19,14 @@ function App() {
 
   if (isCheckingAuth && !authUser) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen bg-[#222] text-white">
         <Loader className="size-10 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="min-h-screen w-full bg-[#222] text-white">
       <Navbar />
       <Routes>
         <Route
