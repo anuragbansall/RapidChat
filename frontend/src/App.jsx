@@ -46,6 +46,17 @@ function App() {
           path="/profile"
           element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
         />
+        <Route
+          path="/logout"
+          element={
+            <div>
+              {/* This is temporary solution to logout the user.*/}
+              {axiosInstance.post("/auth/logout/").then(() => {
+                useAuthStore.authUser = null;
+              })}
+            </div>
+          }
+        />
       </Routes>
     </div>
   );

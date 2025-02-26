@@ -3,7 +3,7 @@ import axiosInstance from "../lib/axios";
 
 export const useAuthStore = create((set) => ({
   authUser: null,
-  isSignningUp: false,
+  isSigningUp: false,
   isLoggingIn: false,
   isLoggingOut: false,
   isUpdatingProfile: false,
@@ -21,15 +21,15 @@ export const useAuthStore = create((set) => ({
   },
 
   signUp: async (data) => {
-    set({
-      isSignningUp: true,
-    });
+    set({ isSigningUp: true });
 
     try {
       const response = await axiosInstance.post("/auth/signup/", data);
       set({ authUser: response.data });
     } catch (error) {
       console.error(error);
+    } finally {
+      set({ isSigningUp: false });
     }
   },
 }));
