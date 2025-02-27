@@ -21,24 +21,27 @@ function Navbar() {
             label: "Settings",
             icon: <Settings />,
             isProtected: false,
+            navigateTo: "/settings",
           },
           {
             label: "Profile",
             icon: <UserPen />,
             isProtected: true,
+            navigateTo: "/profile",
           },
           {
             label: "Logout",
             icon: <LogOut />,
             isProtected: true,
             onClick: logout,
+            navigateTo: "/login",
           },
         ]
           .filter((item) => !item.isProtected || authUser)
           .map((item, index) => (
             <Link
               key={index}
-              href="#"
+              to={item.navigateTo}
               className="flex items-center gap-2"
               onClick={item.onClick}
             >
