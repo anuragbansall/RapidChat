@@ -9,9 +9,10 @@ import ProfilePage from "./pages/ProfilePage";
 import axiosInstance from "./lib/axios";
 import { useAuthStore } from "./store/useAuthStore";
 import { Loader } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const { authUser, checkAuth, isCheckingAuth, logout } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className="min-h-screen w-full bg-[#222] text-white">
       <Navbar />
+      <Toaster position="top-right" />
       <Routes>
         <Route
           path="/"
@@ -45,17 +47,6 @@ function App() {
         <Route
           path="/profile"
           element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/logout"
-          element={
-            <div>
-              {/* This is temporary solution to logout the user.*/}
-              {axiosInstance.post("/auth/logout/").then(() => {
-                useAuthStore.authUser = null;
-              })}
-            </div>
-          }
         />
       </Routes>
     </div>

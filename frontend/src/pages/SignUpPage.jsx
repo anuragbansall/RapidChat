@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { MessageSquareText } from "lucide-react";
+import toast from "react-hot-toast";
+import Logo from "../components/Logo";
+import { Link } from "react-router-dom";
 
 function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,11 +15,29 @@ function SignUpPage() {
 
   const { signUp, isSigningUp } = useAuthStore();
 
-  const validatForm = () => {};
+  const validateForm = () => {
+    if (!formData.fullName.trim()) {
+      toast.error("Username is required");
+      return false;
+    }
+    if (!formData.email.trim()) {
+      toast.error("Email is required");
+      return false;
+    }
+    if (!formData.password.trim()) {
+      toast.error("Password is required");
+      return false;
+    }
+    if (formData.password.trim().length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return false;
+    }
+    return true;
+  };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    validatForm();
+    if (!validateForm()) return;
     signUp(formData);
   };
 
@@ -31,10 +52,8 @@ function SignUpPage() {
     <div className="min-h-screen w-full grid lg:grid-cols-2">
       <div className="flex flex-col items-center justify-center p-6">
         <div className="flex flex-col items-center">
-          <span className="bg-[#1a66ff3f] p-4 rounded-md hover:bg-[#1a66ff98] transition-colors duration-200 cursor-pointer mb-4">
-            <MessageSquareText />
-          </span>
-          <h2 className="text-2xl font-semibold mb-2">Create Account</h2>
+          <Logo />
+          <h2 className="text-2xl font-semibold my-2">Create Account</h2>
           <p className="text-zinc-400">Get started with your free account</p>
         </div>
 
@@ -104,6 +123,12 @@ function SignUpPage() {
               required
             />
           </label>
+          <p className="self-start">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-500 underline">
+              Login
+            </Link>
+          </p>
           <button
             type="submit"
             className="btn-primary w-full"
