@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <div className="flex items-center justify-between px-8 py-6 border-b-[1px] border-zinc-700">
       <h2 className="text-2xl font-semibold">
-        <Link href="/" className="flex gap-2 items-center">
+        <Link to="/" className="flex gap-2 items-center">
           <Logo />
           <span>RapidChat</span>
         </Link>
