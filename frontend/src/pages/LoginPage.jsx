@@ -45,7 +45,7 @@ function LoginPage() {
 
   return (
     <div className="min-h-screen w-full grid lg:grid-cols-2">
-      <div className="flex flex-col items-center justify-center p-6">
+      <div className="flex flex-col items-center justify-center">
         <div className="flex flex-col items-center">
           <Logo />
           <h2 className="text-2xl font-semibold my-2">Welcome Back</h2>
@@ -99,12 +99,6 @@ function LoginPage() {
               required
             />
           </label>
-          <p className="self-start">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-500 underline">
-              Sign up
-            </Link>
-          </p>
           <button
             type="submit"
             className="btn-primary w-full"
@@ -113,9 +107,16 @@ function LoginPage() {
             {isLoggingIn ? "Login account..." : "Login"}
           </button>
         </form>
+
+        <p className="mt-6">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-blue-500 underline">
+            Sign up
+          </Link>
+        </p>
       </div>
 
-      <div className="hidden lg:flex flex-col items-center justify-center p-6 bg-[#541683]">
+      <div className="hidden lg:flex flex-col items-center justify-center bg-[#541683]">
         <img
           src="https://images.unsplash.com/photo-1531525727990-67532cd332c6?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""

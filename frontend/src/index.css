@@ -11,3 +11,7 @@
 .btn-primary {
   @apply bg-[#1a66ff] text-white rounded-md px-4 py-2 cursor-pointer hover:bg-[#1a66ffd7] transition-all duration-300;
 }
+
+.container {
+  @apply container mx-auto px-4 md:px-8 lg:px-12;
+}

@@ -23,7 +23,7 @@ function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="container flex items-center justify-center p-6">
       <div className="w-1/2 flex flex-col gap-y-6">
         <div className="bg-zinc-900 p-4 rounded-md">
           <div className="flex flex-col items-center space-y-2">

@@ -50,7 +50,7 @@ function SignUpPage() {
 
   return (
     <div className="min-h-screen w-full grid lg:grid-cols-2">
-      <div className="flex flex-col items-center justify-center p-6">
+      <div className="flex flex-col items-center justify-center">
         <div className="flex flex-col items-center">
           <Logo />
           <h2 className="text-2xl font-semibold my-2">Create Account</h2>
@@ -123,12 +123,6 @@ function SignUpPage() {
               required
             />
           </label>
-          <p className="self-start">
-            Already have an account?{" "}
-            <Link to="/login" className="text-blue-500 underline">
-              Login
-            </Link>
-          </p>
           <button
             type="submit"
             className="btn-primary w-full"
@@ -137,9 +131,16 @@ function SignUpPage() {
             {isSigningUp ? "Creating account..." : "Create Account"}
           </button>
         </form>
+
+        <p className="mt-6">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-500 underline">
+            Login
+          </Link>
+        </p>
       </div>
 
-      <div className="hidden lg:flex flex-col items-center justify-center p-6 bg-[#101010]">
+      <div className="hidden lg:flex flex-col items-center justify-center bg-[#101010]">
         <img
           src="https://images.unsplash.com/photo-1611262588019-db6cc2032da3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""

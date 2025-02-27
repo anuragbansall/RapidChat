@@ -30,27 +30,25 @@ function App() {
     <div className="min-h-screen w-full bg-[#222] text-white">
       <Navbar />
       <Toaster position="top-center" />
-      <div className="container mx-auto p-4 md:p-8 lg:p-12">
-        <Routes>
-          <Route
-            path="/"
-            element={authUser ? <HomePage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/signup"
-            element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/login"
-            element={!authUser ? <LoginPage /> : <Navigate to="/" />}
-          />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route
-            path="/profile"
-            element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={authUser ? <HomePage /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/signup"
+          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/login"
+          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
+        />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route
+          path="/profile"
+          element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+        />
+      </Routes>
     </div>
   );
 }
