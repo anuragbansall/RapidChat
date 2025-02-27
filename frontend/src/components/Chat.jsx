@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { SendHorizontal } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
@@ -9,8 +9,7 @@ function Chat() {
   const { authUser } = useAuthStore();
 
   const [message, setMessage] = useState("");
-
-  console.log(selectedUser);
+  const chatContainerRef = useRef(null);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -20,8 +19,16 @@ function Chat() {
     setMessage("");
   };
 
+  useEffect(() => {
+    handleAutoScroll();
+  }, [messages]);
+
+  const handleAutoScroll = () => {
+    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  };
+
   return (
-    <div className="flex flex-col max-h-screen w-full bg-[#0D0D0D] space-y-4 p-4 rounded-md">
+    <div className="flex flex-col h-screen w-full bg-[#0D0D0D] space-y-4 p-4 rounded-md">
       <div className="flex items-center mb-4 border-b border-zinc-800 pb-4">
         <div className="size-[3rem] rounded-full overflow-hidden">
           <img
@@ -38,7 +45,7 @@ function Chat() {
         </div>
       </div>
 
-      <div className="grow-2 space-y-2 overflow-y-auto">
+      <div className="grow-2 space-y-2 overflow-y-auto" ref={chatContainerRef}>
         {isMessagesLoading ? (
           <p className="text-gray-400 text-center">Loading messages...</p>
         ) : messages?.length > 0 ? (

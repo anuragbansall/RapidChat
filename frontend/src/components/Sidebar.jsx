@@ -15,8 +15,8 @@ function Sidebar() {
         <div
           key={user._id}
           className={`flex items-center gap-2 w-full ${
-            selectedUser?._id === user._id ? "bg-[#1A66FF]" : "bg-zinc-800"
-          } p-2 rounded-md cursor-pointer hover:brightness-110 duration-200`}
+            selectedUser?._id === user._id ? "bg-zinc-800" : ""
+          } p-2 rounded-md cursor-pointer hover:brightness-110 duration-200 border-b border-zinc-900`}
           onClick={() => getMessages(user)}
         >
           <div className="size-[3rem] rounded-full overflow-hidden">
