@@ -12,11 +12,13 @@ function Chat() {
     subscribeToMessages,
     unsubscribeFromMessages,
   } = useChatStore();
-  const { authUser } = useAuthStore();
+  const { authUser, onlineUsers } = useAuthStore();
 
   const [message, setMessage] = useState("");
   const chatContainerRef = useRef(null);
   const chatInputRef = useRef(null);
+
+  const [isOnline, setIsOnline] = useState(false);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -29,6 +31,8 @@ function Chat() {
   useEffect(() => {
     subscribeToMessages();
     chatInputRef.current.focus();
+
+    setIsOnline(onlineUsers?.includes(selectedUser?._id));
     return () => {
       unsubscribeFromMessages();
     };
@@ -57,6 +61,15 @@ function Chat() {
         </div>
         <div className="font-semibold text-lg ml-4">
           <h3>{selectedUser?.fullName}</h3>
+          {
+            <span
+              className={`text-xs ${
+                isOnline ? "text-green-500" : "text-red-500"
+              }`}
+            >
+              {isOnline ? "Online" : "Offline"}
+            </span>
+          }
         </div>
       </div>
 
