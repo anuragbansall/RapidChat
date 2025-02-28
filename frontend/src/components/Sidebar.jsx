@@ -8,8 +8,6 @@ function Sidebar() {
 
   const { onlineUsers } = useAuthStore();
 
-  console.log(users);
-
   const sortedUsers = [...users].sort((a, b) => {
     return new Date(b.updatedAt) - new Date(a.updatedAt);
   });
