@@ -4,12 +4,19 @@ import { SendHorizontal } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 
 function Chat() {
-  const { messages, isMessagesLoading, sendMessage, selectedUser } =
-    useChatStore();
+  const {
+    messages,
+    isMessagesLoading,
+    sendMessage,
+    selectedUser,
+    subscribeToMessages,
+    unsubscribeFromMessages,
+  } = useChatStore();
   const { authUser } = useAuthStore();
 
   const [message, setMessage] = useState("");
   const chatContainerRef = useRef(null);
+  const chatInputRef = useRef(null);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -18,6 +25,14 @@ function Chat() {
     await sendMessage(message);
     setMessage("");
   };
+
+  useEffect(() => {
+    subscribeToMessages();
+    chatInputRef.current.focus();
+    return () => {
+      unsubscribeFromMessages();
+    };
+  }, [selectedUser]);
 
   useEffect(() => {
     handleAutoScroll();
@@ -81,6 +96,7 @@ function Chat() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className="bg-[#212121] w-full rounded-md outline-none px-4 py-3"
+          ref={chatInputRef}
         />
         <button
           type="submit"

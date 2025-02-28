@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
+import { useAuthStore } from "../store/useAuthStore";
 
 function Sidebar() {
   const { selectedUser, isUsersLoading, getUsers, getMessages, users } =
     useChatStore();
+
+  const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getUsers();
@@ -29,8 +32,11 @@ function Sidebar() {
               className="object-cover object-top w-full h-full"
             />
           </div>
-          <div className="font-semibold text-lg">
+          <div className="font-semibold text-lg leading-tight">
             <h3>{user.fullName}s</h3>
+            {onlineUsers?.includes(user._id) && (
+              <span className="text-xs text-green-500">Online</span>
+            )}
           </div>
         </div>
       ))}
