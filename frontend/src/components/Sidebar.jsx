@@ -13,7 +13,7 @@ function Sidebar() {
   }, [getUsers]);
 
   return (
-    <div className="shrink-0 w-1/3 bg-[#0D0D0D] space-y-2 p-4 rounded-md">
+    <div className="shrink-0 h-screen w-1/3 overflow-y-auto bg-[#0D0D0D] space-y-2 p-4 rounded-md">
       {users.map((user) => (
         <div
           key={user._id}
