@@ -8,13 +8,19 @@ function Sidebar() {
 
   const { onlineUsers } = useAuthStore();
 
+  console.log(users);
+
+  const sortedUsers = [...users].sort((a, b) => {
+    return new Date(b.updatedAt) - new Date(a.updatedAt);
+  });
+
   useEffect(() => {
     getUsers();
   }, [getUsers]);
 
   return (
     <div className="shrink-0 h-screen w-1/3 overflow-y-auto bg-[#0D0D0D] space-y-2 p-4 rounded-md">
-      {users.map((user) => (
+      {sortedUsers.map((user) => (
         <div
           key={user._id}
           className={`flex items-center gap-2 w-full ${
