@@ -33,7 +33,7 @@ function Sidebar() {
             />
           </div>
           <div className="font-semibold text-lg leading-tight">
-            <h3>{user.fullName}s</h3>
+            <h3>{user.fullName}</h3>
             {onlineUsers?.includes(user._id) && (
               <span className="text-xs text-green-500">Online</span>
             )}
